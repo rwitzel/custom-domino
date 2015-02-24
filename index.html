@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- <meta charset="ISO-8859-1"> -->
+<meta charset="UTF-8">
+<title>Custom Dominoes</title>
+<link rel="stylesheet" type="text/css" href="index.css">
+<link rel="stylesheet" type="text/css" href="print.css" media="print" >
+</head>
+<body>
+
+  <template class="dominoUploadTemplate">
+  <div>
+    <h1>Your custom dominoes</h1>
+
+    <!-- upload areas -->
+    <h2>Provide your images</h2>
+
+    {{#nums}}
+    <div class="upload_div" data-num="{{.}}">
+      <output>
+        <img class="thumb" src="img/domino{{.}}.svg" title='' />
+      </output>
+      <span>Domino {{.}}:</span> <br />Upload image: <input type="file" />
+      <br /><input type="text" placeholder="... or image URL"/> <br />
+    </div>
+    {{/nums}}
+
+    <!-- dominoes -->
+    <br clear="all"/>
+    <h2>Print your dominoes</h2>
+
+    {{#dominoes}}
+      <div class="domino_div">
+        <output>
+          <img src="img/blank-domino.svg" title='' data-num="{{upper}}" class="upper"/><br /><img
+            src="img/blank-domino.svg" title='' data-num="{{lower}}" />
+        </output>
+      </div>
+      {{#optionalBreak}}<br class="next_domino_line" clear="all"/>{{/optionalBreak}}
+    {{/dominoes}}
+
+  </div>
+  </template>
+
+  <script type="text/javascript" src="mustache.min.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,48 @@
+.thumb {
+  height: 80px;
+  width: 80px;
+/*   border: 1px solid #000; */
+  margin: 5px 5px 5px 5px;
+}
+
+.upload_div {
+  width:250px;
+  float:left;
+}
+
+.upload_div output {
+  float:left;
+}
+
+.upload_div span {
+  font-weight:bold;
+}
+
+input[type=file] {
+  width:150px;
+  margin-top:5px;
+}
+input[type=text] {
+  width:100px;
+  margin-top:5px;
+}
+
+.domino_div {
+/*   border: 1px solid #000; */
+  float:left;
+  padding: 5px 5px 5px 5px;
+  margin-top: 20px;
+}
+
+.domino_div img {
+/*   border: 1px solid red; */
+  height: 80px;
+  width: 80px;
+  margin:0px;
+  padding:0px;
+  float:left;
+}
+
+.upper {
+  opacity:0.9;
+}
