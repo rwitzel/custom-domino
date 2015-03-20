@@ -1,0 +1,67 @@
+
+*, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
+.clearfix:before, .clearfix:after { content: ''; display: table; }
+.clearfix:after { clear: both; }
+
+body {
+	background: #88ABC2;
+	color: #EBF7F8;
+	font-weight: 500;
+	font-size: 1em;
+	font-family: Arial, sans-serif;
+}
+
+a {
+	color: #D0E0EB;
+	text-decoration: none;
+	outline: none;
+}
+
+a:hover, a:focus {
+	color: #fff;
+}
+
+.content {
+	max-width: 1290px;
+	padding: 0 1em;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.component {
+	position: relative;
+	background: url(../img/gridme.png) repeat center center;
+	padding: 4em;
+	height: 500px;
+	border: 3px solid #49708A;
+	max-width: 901px;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+/* Header */
+h1 span,
+.a-tip {
+	color: #49708A;
+}
+
+.a-tip {
+	padding: 1em;
+}
+
+.a-tip span {
+	border: 2px solid #fff;
+	color: #fff;
+	display: inline-block;
+	padding: 0 5px;
+}
+
+
+@media screen and (max-width: 27em) {
+	.codrops-icon {
+		font-size: 1.5em;
+	}
+	.codrops-icon span {
+		display: none;
+	}
+}

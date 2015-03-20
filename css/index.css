@@ -1,3 +1,12 @@
+/** BEGIN default styles */
+
+body {
+  padding: 10px;
+}
+
+
+/** END default styles */
+
 .thumb {
   height: 80px;
   width: 80px;
