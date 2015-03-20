@@ -34,6 +34,27 @@ function handleFileSelect(evt) {
 
 }
 
+function editImage(evt) {
+    
+    // make template visible
+    if (document.querySelector(".container") == null) {
+        document.body.insertAdjacentHTML( 'afterbegin', document.querySelector(".dominoResizeCropTemplate").innerHTML );
+    }
+    
+    // make component visible
+    document.querySelector(".container").style.display = "block" ; // .classList.add("with_frame");
+    
+    // set image in component 
+    var img_elem = evt.target.parentElement.querySelector(".thumb"); // navigate to the image element
+    document.querySelector(".resize-image").src = img_elem.src;
+    
+    // provide information for the callback
+    domino_symbol = evt.target.parentElement.getAttribute("data-num");
+
+    // kick off the initialisation of the resize/crop component
+    resizeableImage($('.resize-image'));
+}
+
 /**
  * Uploads the thumbnail image.
  * 
@@ -139,11 +160,12 @@ function onDocumentLoad(numSymbols) {
 
     // +++ add event handlers
     
-    // 
+    // for upload area
     var upload_divs = document.querySelectorAll(".upload_div");
     for (var i = 0; i < upload_divs.length; i++) {
         upload_divs[i].querySelector("input[type=file]").addEventListener('change', handleFileSelect, false);
         upload_divs[i].querySelector("input[type=text]").addEventListener('change', handleUrl, false);
+        upload_divs[i].querySelector(".btn_edit_image").addEventListener('click', editImage, false);
     }
     
     // ... for print area
@@ -199,6 +221,9 @@ function createModel(num) {
         dominoes: dominoes
     }
 }
+
+// this is used to control the resize/crop component.
+var domino_symbol = -1;
 
 onDocumentLoad();
 
