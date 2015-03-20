@@ -3,14 +3,25 @@
 <head>
 <!-- <meta charset="ISO-8859-1"> -->
 <meta charset="UTF-8">
-<title>Custom Dominoes</title>
+<title>Custom Domino</title>
 <link rel="stylesheet" type="text/css" href="index.css">
 <link rel="stylesheet" type="text/css" href="print.css" media="print" >
 </head>
 <body>
 
+  <!-- this style is dynamically updated when the user chooses another width -->
+  <style id="domino_width"> .domino_div img { height: 10mm; width: 10mm; } </style>
+
   <template class="dominoUploadTemplate">
-  <div>
+  <div class="template_content">
+
+    <label>
+        Choose the number of symbols: 
+        <!-- with type="range" we could avoid validation ... -->
+        <input class="inp_num_symbols" value="{{numSymbols}}" type="number" min="2" max="9" required/>
+    </label>
+    <br clear="all"/>
+
     <h1>Your custom dominoes</h1>
 
     <!-- upload areas -->
@@ -29,6 +40,17 @@
     <!-- dominoes -->
     <br clear="all"/>
     <h2>Print your dominoes</h2>
+    
+    <div class="print_form">
+      <label>
+          Choose the width of the dominoes: 
+          <!-- step="any" allows decimal values -->
+          <input class="inp_width" value="{{width}}" type="number" min="5" max="300" step="any"/> <span title="1 mm(millimeter) is 39.37 mil.">mm.</span>
+      </label>
+      <br clear="all"/>
+      <button class="btn_print">Open print dialog</button>
+      <br clear="all"/>
+    </div>
 
     {{#dominoes}}
       <div class="domino_div">

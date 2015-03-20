@@ -64,7 +64,7 @@ function updateDominoes() {
         img_map[div_num] = img_elem;
     }
     
-    // update URL and title of all dominoes
+    // update URL and title of all dominoes, update the width
     var domino_imgs = document.querySelectorAll(".domino_div img");
     for (var i = 0; i < domino_imgs.length; i++) {
         var img_elem = domino_imgs[i];
@@ -75,14 +75,52 @@ function updateDominoes() {
 }
 
 /**
- * Creates the upload area for images.
+ * Opens the browser-specific dialog for printing. 
  */
-function onDocumentLoad() {
+function handleClickOnPrintButton() {
+    print();
+}
+
+/**
+ * Changes the CSS that sets the print dimensions of the dominoes.
+ */
+function handleChangeOnDominoWidthInput() {
+    var newWidth = document.querySelector(".inp_width").value;
+    var css = " .domino_div img { height: DOMINO_WIDTHmm; width: DOMINO_WIDTHmm; } ";
+    css = css.replace(/DOMINO_WIDTH/g, "" + newWidth);
+    document.querySelector("#domino_width").textContent = css; 
+}
+
+/**
+ * Replaces the current page content with a new page that contains the given number of domino symbols.
+ */
+function handleChangeOnNumSymbolsInput(evt) {
+    
+    // validate entered number of symbols (the browser restrict the value only when a form is submitted)
+    var numSymbols = parseInt(document.querySelector('.inp_num_symbols').value);
+    console.log("numSymbols", numSymbols, evt);
+    if (! (numSymbols >= 2 && numSymbols <=9 )) {
+        numSymbols = 6;
+    } 
+    
+    // remove old contents from the page
+    var oldTemplate = document.querySelector('.template_content');
+    oldTemplate.parentNode.removeChild(oldTemplate);
+    
+    onDocumentLoad(numSymbols);
+}
+
+/**
+ * Creates the upload area for images.
+ * <p>
+ * @param numSymbols If null, the default (6) is applied.
+ */
+function onDocumentLoad(numSymbols) {
 
     // insert upload area
     var template = document.querySelector('.dominoUploadTemplate');
-    var model = createModel(6);
-    console.log("model", model);
+    var model = createModel(numSymbols != null ? numSymbols : 6);
+
     var content = Mustache.render(template.innerHTML, model);
     document.body.insertAdjacentHTML( 'beforeend', content );
 
@@ -92,6 +130,10 @@ function onDocumentLoad() {
         upload_divs[i].querySelector("input[type=file]").addEventListener('change', handleFileSelect, false);
         upload_divs[i].querySelector("input[type=text]").addEventListener('change', handleUrl, false);
     }
+    
+    document.querySelector(".btn_print").addEventListener('click', handleClickOnPrintButton, false);
+    document.querySelector(".inp_width").addEventListener('change', handleChangeOnDominoWidthInput, false);
+    document.querySelector(".inp_num_symbols").addEventListener('change', handleChangeOnNumSymbolsInput, false);
     
     updateDominoes();
 }
@@ -132,6 +174,8 @@ function createModel(num) {
     }
     
     return {
+        numSymbols : num,
+        width: 10,
         nums : nums,
         dominoes: dominoes
     }

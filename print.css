@@ -1,3 +1,8 @@
-h1,h2,div.upload_div,br.next_domino_line {
+h1,h2,div.upload_div,br.next_domino_line,.print_form {
   display:none
+}
+
+/* no page between the two parts of a single domino */
+.domino_div {
+    page-break-inside: avoid; 
 }
