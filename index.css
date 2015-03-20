@@ -30,8 +30,7 @@ input[type=text] {
 .domino_div {
 /*   border: 1px solid #000; */
   float:left;
-  padding: 5px 5px 5px 5px;
-  margin-top: 20px;
+  margin: 20px 5px 5px 5px; /* top: 20px; */
 }
 
 .domino_div img {
@@ -57,4 +56,8 @@ input[type=text] {
 
 input:invalid {
   color:red;
+}
+
+.with_frame .domino_div {
+  border:1mm dotted #777;
 }

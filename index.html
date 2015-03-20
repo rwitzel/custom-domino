@@ -47,10 +47,15 @@
           <!-- step="any" allows decimal values -->
           <input class="inp_width" value="{{width}}" type="number" min="5" max="300" step="any"/> <span title="1 mm(millimeter) is 39.37 mil.">mm.</span>
       </label>
-      <br clear="all"/>
+      <br/>
+      <label>
+          Add a frame to ease cutting? 
+          <input class="inp_with_frame" type="checkbox" />
+      </label>
+      <br/>
       <button class="btn_print">Open print dialog</button>
-      <br clear="all"/>
     </div>
+    <br clear="all"/>
 
     {{#dominoes}}
       <div class="domino_div">

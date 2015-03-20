@@ -92,6 +92,19 @@ function handleChangeOnDominoWidthInput() {
 }
 
 /**
+ * Adds or removes a frame around the generated dominoes. 
+ */
+function handleChangeOnWithFrameCheckbox() {
+    var withFrame = document.querySelector(".inp_with_frame").checked;
+    if (withFrame) {
+        document.querySelector("body").classList.add("with_frame");
+    }
+    else {
+        document.querySelector("body").classList.remove("with_frame");
+    }
+}
+
+/**
  * Replaces the current page content with a new page that contains the given number of domino symbols.
  */
 function handleChangeOnNumSymbolsInput(evt) {
@@ -117,24 +130,30 @@ function handleChangeOnNumSymbolsInput(evt) {
  */
 function onDocumentLoad(numSymbols) {
 
-    // insert upload area
+    // +++ insert upload area
     var template = document.querySelector('.dominoUploadTemplate');
     var model = createModel(numSymbols != null ? numSymbols : 6);
 
     var content = Mustache.render(template.innerHTML, model);
     document.body.insertAdjacentHTML( 'beforeend', content );
 
-    // add event handlers
+    // +++ add event handlers
+    
+    // 
     var upload_divs = document.querySelectorAll(".upload_div");
     for (var i = 0; i < upload_divs.length; i++) {
         upload_divs[i].querySelector("input[type=file]").addEventListener('change', handleFileSelect, false);
         upload_divs[i].querySelector("input[type=text]").addEventListener('change', handleUrl, false);
     }
     
+    // ... for print area
     document.querySelector(".btn_print").addEventListener('click', handleClickOnPrintButton, false);
     document.querySelector(".inp_width").addEventListener('change', handleChangeOnDominoWidthInput, false);
+    document.querySelector(".inp_with_frame").addEventListener('change', handleChangeOnWithFrameCheckbox, false);
+
+    // ... for general setting
     document.querySelector(".inp_num_symbols").addEventListener('change', handleChangeOnNumSymbolsInput, false);
-    
+
     updateDominoes();
 }
 
