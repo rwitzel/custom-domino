@@ -32,11 +32,18 @@
 
     {{#nums}}
     <div class="upload_div" data-num="{{.}}">
+      <!-- the cropped image -->
       <output>
         <img class="thumb" src="img/domino{{.}}.svg" title='' />
       </output>
+      <!-- the original image -->
+      <img class="original" src="img/domino{{.}}.svg" style="display:none" />
+      
+      <!-- the upload area -->
       <span>Domino {{.}}:</span> <br />Upload image: <input type="file" />
       <br /><button class="btn_edit_image">Resize/crop</button>
+      
+      <!-- the form field for an external URL -->
       <br /><input type="text" placeholder="... or image URL"/> 
     </div>
     {{/nums}}
@@ -95,7 +102,7 @@
 
   <!-- these scripts cannot be loaded within the template. Therefore, we include them here. -->
   <script src="lib/jquery/jquery-2.1.1.min.js"></script>
-  <script src="lib/cropper/cropper.min.js"></script>
+  <script src="lib/cropper/cropper.js"></script>
 
 </body>
 </html>

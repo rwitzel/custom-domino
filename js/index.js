@@ -50,16 +50,27 @@ function editImage(evt) {
     document.body.insertAdjacentHTML( 'afterbegin', document.querySelector(".dominoResizeCropTemplate").innerHTML );
     
     // set image in component 
-    var img_elem = evt.target.parentElement.querySelector(".thumb"); // navigate to the image element
+    var img_elem = evt.target.parentElement.querySelector(".original");
     document.querySelector(".resize-image").src = img_elem.src;
     
     // provide information for the callback
     domino_symbol = evt.target.parentElement.getAttribute("data-num");
 
-    // kick off the initialisation of the resize/crop component
-    $('.container > img').cropper({
+    // initialise the crop component
+    var img = $('.container > img');
+    
+    img.cropper({
         aspectRatio: 1 / 1
     });
+    
+    
+    // load crop state (after the container got its correct dimension)
+    window.setTimeout(function() {
+        if (domino_crop_states[domino_symbol]) {
+            img.cropper('setCanvasData', domino_crop_states[domino_symbol].canvasData);
+            img.cropper('setCropBoxData', domino_crop_states[domino_symbol].cropBoxData);
+        };
+    },0);
     
     document.querySelector(".btn-crop").addEventListener('click', crop, false);
 }
@@ -69,31 +80,47 @@ function editImage(evt) {
  */
 function crop() {
     
-    var cropCanvas = $('.container > img').cropper('getCroppedCanvas', {
-      width: 300,
-      height: 300
+    var img = $('.container > img');
+    
+    // save crop state
+    domino_crop_states[domino_symbol] = {
+        canvasData : img.cropper('getCanvasData'),
+        cropBoxData : img.cropper('getCropBoxData'),
+        imageData : img.cropper('getImageData'),
+        containerData : img.cropper('getContainerData'),
+    };
+
+    // crop
+    var cropCanvas = img.cropper('getCroppedCanvas', {
+        width: 300,
+        height: 300
     });
     
     var cropUrl = cropCanvas.toDataURL("image/png");
     
     var upload_divs = document.querySelectorAll(".upload_div");
     upload_divs[domino_symbol].querySelector(".thumb").src = cropUrl;
+    
+    // update UI
     updateDominoes();
     removeImageEditor();
 }
 
 /**
- * Uploads the thumbnail image.
+ * Updates the thumbnail image.
  * 
  * @param input_elem
  * @param img_src
  * @param img_title
  */
 function updateThumbnail(input_elem, img_src, img_title) {
-    // navigate to the image element
+
     var img_elem = input_elem.parentElement.querySelector(".thumb");
     img_elem.src = img_src;
     img_elem.title = img_title;
+
+    var orig_elem = input_elem.parentElement.querySelector(".original");
+    orig_elem.src = img_src;
     
     updateDominoes();
 }
@@ -251,6 +278,7 @@ function createModel(num) {
 
 // this is used to control the resize/crop component.
 var domino_symbol = -1;
+var domino_crop_states = [];
 
 onDocumentLoad();
 
