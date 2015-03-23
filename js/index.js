@@ -34,15 +34,18 @@ function handleFileSelect(evt) {
 
 }
 
+
+function removeImageEditor() {
+    if (document.querySelector(".container") != null) {
+        var container = document.querySelector(".container");
+        container.parentNode.removeChild(container);
+    }    
+}
+
 function editImage(evt) {
     
-    // make template visible
-    if (document.querySelector(".container") == null) {
-        document.body.insertAdjacentHTML( 'afterbegin', document.querySelector(".dominoResizeCropTemplate").innerHTML );
-    }
-    
-    // make component visible
-    document.querySelector(".container").style.display = "block" ; // .classList.add("with_frame");
+    // insert image editor
+    document.body.insertAdjacentHTML( 'afterbegin', document.querySelector(".dominoResizeCropTemplate").innerHTML );
     
     // set image in component 
     var img_elem = evt.target.parentElement.querySelector(".thumb"); // navigate to the image element
