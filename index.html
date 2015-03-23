@@ -77,41 +77,25 @@
   <script type="text/javascript" src="js/mustache.min.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
 
-  <!-- The style of the resize/crop component are quite nice.
-       Therefore, they are imported here directly so that they are used for the entire page. -->
-  <style>
-      @import url("lib/image-resize-crop-canvas/css/demo.css");
-      @import url("lib/image-resize-crop-canvas/css/component.css");
-  </style>
-    
-
   <template class="dominoResizeCropTemplate">
 
-    <div class="container">
-        <div class="content">
-            <header class="codrops-header">
-                <h1>Image Resizing &amp; Cropping</h1>
-            </header>
-            <div class="component">
-                <div class="overlay">
-                    <div class="overlay-inner">
-                    </div>
-                </div>
-                <!-- This image must be on the same domain as the demo or it will not work on a local file system -->
-                <!-- http://en.wikipedia.org/wiki/Cross-origin_resource_sharing -->
-                <img class="resize-image" src="lib/image-resize-crop-canvas/img/image.jpg" alt="image for resizing">
-                <button class="btn-crop js-crop">Crop<img class="icon-crop" src="lib/image-resize-crop-canvas/img/crop.svg"></button>
-            </div>
-            <div class="a-tip">
-                <p><strong>Hint:</strong> hold <span>SHIFT</span> while resizing to keep the original aspect ratio.</p>
-            </div>
-        </div><!-- /content -->
-    </div> <!-- /container -->
+    <style>
+      @import url("lib/cropper/cropper.min.css");
+    </style>
+
+    <div class="cropContainer">
+        <div class="container">
+            <!-- This image must be on the same domain as the demo or it will not work on a local file system -->
+            <!-- http://en.wikipedia.org/wiki/Cross-origin_resource_sharing -->
+            <img class="resize-image" src="lib/image-resize-crop-canvas/img/image.jpg">
+        </div>
+        <button class="btn-crop">Crop<img src="img/crop.svg"></button>
+    </div>
   </template>
 
   <!-- these scripts cannot be loaded within the template. Therefore, we include them here. -->
-  <script src="lib/image-resize-crop-canvas/js/jquery-2.1.1.min.js"></script>
-  <script src="lib/image-resize-crop-canvas/js/component.js"></script>
+  <script src="lib/jquery/jquery-2.1.1.min.js"></script>
+  <script src="lib/cropper/cropper.min.js"></script>
 
 </body>
 </html>

@@ -36,13 +36,15 @@ function handleFileSelect(evt) {
 
 
 function removeImageEditor() {
-    if (document.querySelector(".container") != null) {
-        var container = document.querySelector(".container");
+    if (document.querySelector(".cropContainer") != null) {
+        var container = document.querySelector(".cropContainer");
         container.parentNode.removeChild(container);
     }    
 }
 
 function editImage(evt) {
+    
+    removeImageEditor();
     
     // insert image editor
     document.body.insertAdjacentHTML( 'afterbegin', document.querySelector(".dominoResizeCropTemplate").innerHTML );
@@ -55,7 +57,29 @@ function editImage(evt) {
     domino_symbol = evt.target.parentElement.getAttribute("data-num");
 
     // kick off the initialisation of the resize/crop component
-    resizeableImage($('.resize-image'));
+    $('.container > img').cropper({
+        aspectRatio: 1 / 1
+    });
+    
+    document.querySelector(".btn-crop").addEventListener('click', crop, false);
+}
+
+/**
+ * Crops the image and closes the edit dialog.
+ */
+function crop() {
+    
+    var cropCanvas = $('.container > img').cropper('getCroppedCanvas', {
+      width: 300,
+      height: 300
+    });
+    
+    var cropUrl = cropCanvas.toDataURL("image/png");
+    
+    var upload_divs = document.querySelectorAll(".upload_div");
+    upload_divs[domino_symbol].querySelector(".thumb").src = cropUrl;
+    updateDominoes();
+    removeImageEditor();
 }
 
 /**

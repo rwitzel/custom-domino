@@ -1,6 +1,11 @@
 /** BEGIN default styles */
 
 body {
+    background: #88ABC2;
+    color: #EBF7F8;
+}
+
+body {
   padding: 10px;
 }
 
@@ -69,4 +74,13 @@ input:invalid {
 
 .with_frame .domino_div {
   border:1mm dotted #777;
+}
+
+.cropContainer {
+    width:100%;
+}
+.container {
+    width: 400px;
+    height: 400px;
+    margin: 0 auto; /* center */
 }
