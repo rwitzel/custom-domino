@@ -207,7 +207,7 @@ function onDocumentLoad(numSymbols) {
 
     // +++ insert upload area
     var template = document.querySelector('.dominoUploadTemplate');
-    var model = createModel(numSymbols != null ? numSymbols : 6);
+    var model = createModel(numSymbols != null ? numSymbols : 7);
 
     var content = Mustache.render(template.innerHTML, model);
     document.body.insertAdjacentHTML( 'beforeend', content );
@@ -252,6 +252,9 @@ function onDocumentLoad(numSymbols) {
  * @returns A model for the page that has to show all dominoes and upload areas for the images.
  */
 function createModel(num) {
+    
+    num = num - 1;
+    
     var nums = [];
     var dominoes = [];
     
@@ -269,7 +272,7 @@ function createModel(num) {
     }
     
     return {
-        numSymbols : num,
+        numSymbols : num + 1,
         width: 10,
         nums : nums,
         dominoes: dominoes

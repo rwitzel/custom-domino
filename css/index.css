@@ -56,8 +56,14 @@ input[type=text] {
   float:left;
 }
 
+.domino_div .output {
+    background-color: white; /* the background of the page must not be seen through */
+}
+
+/* the upper part of the domino looks a bit brighter (opacity) and is rotated. */
 .upper {
   opacity:0.9;
+   transform: rotate(180deg);
 }
 
 .btn_print {
