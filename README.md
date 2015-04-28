@@ -1,0 +1,1 @@
+An attempt to create a website without both server-side backend and client-side framework.
