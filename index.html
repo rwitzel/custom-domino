@@ -1,109 +1,387 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<!-- <meta charset="ISO-8859-1"> -->
-<meta charset="UTF-8">
-<title>Design your domino</title>
-<link rel="stylesheet" type="text/css" href="css/normalize.css">
-<link rel="stylesheet" type="text/css" href="css/index.css">
-<link rel="stylesheet" type="text/css" href="css/print.css" media="print" >
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Landing Page - Start Bootstrap Theme</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/landing-page.css" rel="stylesheet"><!-- original template CSS -->
+    <link href="css/index.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/print.css" media="print" >
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
+
 <body>
 
-  <!-- this style is dynamically updated when the user chooses another width -->
-  <style id="domino_width"> .domino_div img { height: 10mm; width: 10mm; } </style>
+    <!-- this style is dynamically updated when the user chooses another width -->
+    <style id="domino_width"> .domino_div img { height: 10mm; width: 10mm; } </style>
 
-  <template class="dominoUploadTemplate">
-  <div class="template_content">
-
-     <div class="div_num_symbols">
-      <label>
-          Choose the number of symbols: 
-          <!-- with type="range" we could avoid validation ... -->
-          <input class="inp_num_symbols" value="{{numSymbols}}" type="number" min="2" max="9" required/>
-      </label>
-      <br clear="all"/>
-    </div>
-
-    <h1>Design your dominoes</h1>
-
-    <!-- upload areas -->
-    <h2>Provide your images</h2>
-
-    {{#nums}}
-    <div class="upload_div" data-num="{{.}}">
-      <!-- the cropped image -->
-      <output>
-        <img class="thumb" src="img/domino{{.}}.svg" title='' />
-      </output>
-      <!-- the original image -->
-      <img class="original" src="img/domino{{.}}.svg" style="display:none" />
-      
-      <!-- the upload area -->
-      <span>Domino {{.}}:</span> <br />Upload image: <input type="file" />
-      <br /><button class="btn_edit_image">Resize/crop</button>
-      
-      <!-- the form field for an external URL -->
-      <br /><input type="text" placeholder="... or image URL"/> 
-    </div>
-    {{/nums}}
-
-    <!-- dominoes -->
-    <br clear="all"/>
-    <h2>Print your dominoes</h2>
-    
-    <div class="print_form">
-      <label>
-          Choose the width of the dominoes: 
-          <!-- step="any" allows decimal values -->
-          <input class="inp_width" value="{{width}}" type="number" min="5" max="300" step="any"/> <span title="1 mm(millimeter) is 39.37 mil.">mm.</span>
-      </label>
-      <br/>
-      <label>
-          Add a frame to ease cutting? 
-          <input class="inp_with_frame" type="checkbox" />
-      </label>
-      <br/>
-      <button class="btn_print">Open print dialog</button>
-    </div>
-    <br clear="all"/>
-
-    {{#dominoes}}
-      <div class="domino_div">
-        <output>
-          <img src="img/blank-domino.svg" title='' data-num="{{upper}}" class="upper"/><br /><img
-            src="img/blank-domino.svg" title='' data-num="{{lower}}" />
-        </output>
-      </div>
-      {{#optionalBreak}}<br class="next_domino_line" clear="all"/>{{/optionalBreak}}
-    {{/dominoes}}
-
-  </div>
-  </template>
-
-  <script type="text/javascript" src="js/mustache.min.js"></script>
-  <script type="text/javascript" src="js/index.js"></script>
-
-  <template class="dominoResizeCropTemplate">
-
-    <style>
-      @import url("lib/cropper/cropper.min.css");
-    </style>
-
-    <div class="cropContainer">
-        <div class="container">
-            <!-- This image must be on the same domain as the demo or it will not work on a local file system -->
-            <!-- http://en.wikipedia.org/wiki/Cross-origin_resource_sharing -->
-            <img class="resize-image" src="lib/image-resize-crop-canvas/img/image.jpg">
+    <!-- Navigation -->
+    <nav class="no_print navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+<!--                     <span class="icon-bar"></span> -->
+<!--                     <span class="icon-bar"></span> -->
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+<!--                     <li> -->
+<!--                         <a href="#about">About</a> -->
+<!--                     </li> -->
+<!--                     <li> -->
+<!--                         <a href="#contact">Contact</a> -->
+<!--                     </li> -->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
         </div>
-        <button class="btn-crop">Crop<img src="img/crop.svg"></button>
-    </div>
-  </template>
+        <!-- /.container -->
+    </nav>
 
-  <!-- these scripts cannot be loaded within the template. Therefore, we include them here. -->
-  <script src="lib/jquery/jquery-2.1.1.min.js"></script>
-  <script src="lib/cropper/cropper.js"></script>
+
+    <!-- Header -->
+    <a name="about"></a>
+    <div class="no_print intro-header">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                        <h1>Design Domino</h1>
+                        <h3>A Tool For Hand-Crafted Tiles</h3>
+                        <hr class="intro-divider">
+                        <ul class="list-inline intro-social-buttons">
+                            <li>
+                                <a href="https://twitter.com/DesignDomino" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/rwitzel/design-domino" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/DesignDominoes" class="btn btn-default btn-lg"><i class="fa fa-facebook fa-fw"></i> <span class="network-name">Facebook</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.intro-header -->
+
+    <!-- Page Content -->
+
+    <!-- section "you need" ========================================================================== -->
+    <div class="no_print content-section-a">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Design your own dominoes</h2>
+                    <p class="lead">
+                        You need 
+                    </p>
+                    <ul class="lead">
+                        <li>some photographs that can be used as tiles</li>
+                        <li>a printer</li>
+                        <li>scissors</li>
+                        <li>glue</li>
+                        <li>some card board</li>
+                    </ul>
+                                            
+                    
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <img class="img-responsive" src="img/Toppledominos.jpg" alt="">
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+
+    <!-- section "five steps" ========================================================================== -->
+    <div class="no_print content-section-b">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Five steps to your tiles</h2>
+                    <ol class="lead">
+                        <li>Choose the number of different symbols</li>
+                        <li>Upload images</li>
+                        <li>Set print options</li>
+                        <li>Print</li>
+                        <li>Glue and Cut</li>
+                    </ol>
+                    <p class="lead">
+                    Enjoy.
+                    </p>
+                </div>
+                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                    <img class="img-responsive" src="img/circle-dominoes.jpg" alt="">
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-b -->
+    
+    
+    <!-- container for dynamic content -->
+    <div class="dynamic">
+      <!-- place for the dynamic content -->
+    </div>
+
+    <!-- section "glue and cut" ========================================================================== -->
+    <div class="no_print content-section-a">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading long-heading"><span class="step-number">5</span> Glue and cut</h2>
+                    <p class="lead">This step is handwork and it will take some time. Good luck!</p>
+                    <p class="lead">We would be glad if you post your result on <a href="#about">Facebook</a>.</p>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+    
+    <template class="dominoUploadTemplate">
+      <div class="template_content">
+
+        <!-- section "choose no. of dominoes" ========================================================================== -->
+        <div class="no_print content-section-a">
+    
+            <div class="container">
+    
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12">
+                        <hr class="section-heading-spacer">
+                        <div class="clearfix"></div>
+                        <h2 class="section-heading long-heading"><span class="step-number">1</span> Choose the number of different symbols</h2>
+                        <div class="div_num_symbols">
+                          <button value="5" class="btn {{{btnActive5}}}" >5</button>
+                          <button value="6" class="btn {{{btnActive6}}}" >6</button>
+                          <button value="7" class="btn {{{btnActive7}}}" >7</button>
+                          <button value="8" class="btn {{{btnActive8}}}" >8</button>
+                          <button value="9" class="btn {{{btnActive9}}}" >9</button>
+                          <label style="display:none">
+                              <!-- with type="range" we could avoid validation ... -->
+                              <input class="inp_num_symbols" value="{{numSymbols}}" type="number" min="5" max="9" required/>
+                          </label>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+            <!-- /.container -->
+    
+        </div>
+        <!-- /.content-section-a -->
+    
+        <!-- section "Upload images" ========================================================================== -->
+        <div class="no_print content-section-b">
+    
+            <div class="container">
+    
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12">
+                        <hr class="section-heading-spacer">
+                        <div class="clearfix"></div>
+                        <h2 class="section-heading"><span class="step-number">2</span> Upload images</h2>
+
+                        
+                        <div class="div_upload_divs_container">
+                        
+                            <p class="lead">Click on a tile to replace it with your own image</p>
+
+                            <div class="div_upload_divs">
+                                {{#nums}}
+                                <div class="upload_div" data-num="{{num}}">
+                                  <!-- the cropped image -->
+                                  <output>
+                                    <img class="thumb" src="{{url}}" title='' />
+                                  </output>
+                                  
+                                  <!-- resize / crop button -->
+                                  <br/>
+                                  <button class="btn btn_edit_image">
+                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                  </button>
+                                  
+                                  <!-- the original image -->
+                                  <img class="original" src="{{url}}" style="display:none" />
+                                  
+                                  <!-- the upload area -->
+                                  <input type="file" style="display:none" /> <!-- style="display:none" -->
+                                  
+                                </div>
+                                {{/nums}}
+                            </div>
+
+                        </div>
+                        
+                        <div class="placeholder_for_crop_container"></div>
+                                                
+                    </div>
+                </div>
+    
+            </div>
+            <!-- /.container -->
+
+        </div>
+        <!-- /.content-section-b -->
+
+        <!-- section "Print Options" ========================================================================== -->
+        <div class="no_print content-section-a">
+    
+            <div class="container">
+    
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12">
+                        <hr class="section-heading-spacer">
+                        <div class="clearfix"></div>
+                        <h2 class="section-heading"><span class="step-number">3</span> Set print options</h2>
+
+                        <div class="print_form">
+                            <form class="col-lg-4 col-sm-4 lead">
+                                <div class="form-group">
+                                  <label>Domino width (<span title="1 mm(millimeter) is 39.37 mil.">in mm</span>)</label> 
+                                  <!-- step="any" allows decimal values -->
+                                  <input class="form-control inp_width" value="{{width}}" type="number" min="5" max="300" step="any"/>
+                                </div>
+                                <div class="checkbox">
+                                  <label>
+                                    <input class="inp_with_frame" type="checkbox" /> Add a frame to ease cutting
+                                  </label> 
+                                </div>
+                            </form>
+                        </div>
+                                                
+                    </div>
+                </div>
+    
+            </div>
+            <!-- /.container -->
+
+        </div>
+        <!-- /.content-section-a -->
+
+       <!-- section "Results and Print" ========================================================================== -->
+        <div class="content-section-b">
+    
+            <div class="container">
+    
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12">
+                        <hr class="no_print section-heading-spacer">
+                        <div class="no_print clearfix"></div>
+                        <h2 class="no_print section-heading"><span class="step-number">4</span> Print</h2>
+
+                        <div class="print_button_div">
+
+                            <div class="domino_results">
+                                {{#dominoes}}
+                                  <div class="domino_div">
+                                    <output>
+                                      <img src="img/blank-domino.svg" title='' data-num="{{upper}}" class="upper"/><br /><img
+                                        src="img/blank-domino.svg" title='' data-num="{{lower}}" />
+                                    </output>
+                                  </div>
+                                  {{#optionalBreak}}<br class="no_print next_domino_line" clear="all"/>{{/optionalBreak}}
+                                {{/dominoes}}
+                            </div>
+                            
+                            <br clear="all"/>
+
+                            <button class="no_print  btn btn_print lead">Open print dialog</button>
+                        </div>
+                                                
+                    </div>
+                </div>
+    
+            </div>
+            <!-- /.container -->
+
+        </div>
+        <!-- /.content-section-b -->
+
+
+      </div>
+    </template>
+
+    <!-- jQuery -->
+    <script src="js/jquery-2.1.4.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="js/mustache.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+
+    <template class="dominoResizeCropTemplate">
+    
+        <style>
+          @import url("lib/cropper/cropper.css");
+        </style>
+        
+        <div class="cropContainer">
+            <div class="container">
+                <!-- This image must be on the same domain as the demo or it will not work on a local file system -->
+                <img class="resize-image" src="lib/image-resize-crop-canvas/img/image.jpg">
+            </div>
+            <button class="btn btn-crop">Crop</button>
+        </div>
+    </template>
+    
+    <!-- these scripts cannot be loaded within the template. Therefore, we include them here. -->
+    <script src="lib/cropper/cropper.js"></script>
 
 </body>
-</html>
 
+</html>

@@ -1,11 +1,18 @@
 
 /**
- * Handle URL of image typed in by the user.
- * 
- * @param evt
+ * @param elem an element
+ * @param selector Example: ".foo input"
+ * @returns {Boolean} Returns the closest ancestor that matches the given selector.
  */
-function handleUrl(evt) {
-    updateThumbnail(evt.target, evt.target.value, evt.target.value);
+function closest(elem, selector) {
+    while (elem) {
+        if (elem.matches(selector)) {
+            return elem;
+        } else {
+            elem = elem.parentNode;
+        }
+    }
+    return null;
 }
 
 /**
@@ -47,17 +54,19 @@ function editImage(evt) {
     removeImageEditor();
     
     // insert image editor
-    document.body.insertAdjacentHTML( 'afterbegin', document.querySelector(".dominoResizeCropTemplate").innerHTML );
+    document.querySelector(".placeholder_for_crop_container").insertAdjacentHTML( 'afterbegin', document.querySelector(".dominoResizeCropTemplate").innerHTML );
+    
+    var upload_div = closest(evt.target, ".upload_div")
     
     // set image in component 
-    var img_elem = evt.target.parentElement.querySelector(".original");
+    var img_elem = upload_div.querySelector(".original");
     document.querySelector(".resize-image").src = img_elem.src;
     
     // provide information for the callback
-    domino_symbol = evt.target.parentElement.getAttribute("data-num");
+    domino_symbol = upload_div.getAttribute("data-num");
 
     // initialise the crop component
-    var img = $('.container > img');
+    var img = $('.cropContainer .container > img');
     
     img.cropper({
         aspectRatio: 1 / 1
@@ -122,6 +131,9 @@ function updateThumbnail(input_elem, img_src, img_title) {
     var orig_elem = input_elem.parentElement.querySelector(".original");
     orig_elem.src = img_src;
     
+    var index = closest(orig_elem, ".upload_div").getAttribute("data-num");
+    domino_urls[index] = img_elem.src; 
+    
     updateDominoes();
 }
 
@@ -185,9 +197,9 @@ function handleChangeOnWithFrameCheckbox() {
 function handleChangeOnNumSymbolsInput(evt) {
     
     // validate entered number of symbols (the browser restrict the value only when a form is submitted)
-    var numSymbols = parseInt(document.querySelector('.inp_num_symbols').value);
-    console.log("numSymbols", numSymbols, evt);
-    if (! (numSymbols >= 2 && numSymbols <=9 )) {
+    var numSymbols = parseInt(evt.target.value);
+    //console.log("numSymbols", numSymbols, evt);
+    if (! (numSymbols >= 5 && numSymbols <=9 )) {
         numSymbols = 6;
     } 
     
@@ -210,15 +222,21 @@ function onDocumentLoad(numSymbols) {
     var model = createModel(numSymbols != null ? numSymbols : 7);
 
     var content = Mustache.render(template.innerHTML, model);
-    document.body.insertAdjacentHTML( 'beforeend', content );
+    //console.log(content);
+    document.querySelector(".dynamic").insertAdjacentHTML( 'beforeend', content );
 
     // +++ add event handlers
     
     // for upload area
     var upload_divs = document.querySelectorAll(".upload_div");
     for (var i = 0; i < upload_divs.length; i++) {
+        
+        upload_divs[i].querySelector(".thumb").addEventListener('click', function(evt) {
+            // delegate to upload file input
+            evt.target.parentNode.parentNode.querySelector("input[type=file]").click();
+        }, false);
+        
         upload_divs[i].querySelector("input[type=file]").addEventListener('change', handleFileSelect, false);
-        upload_divs[i].querySelector("input[type=text]").addEventListener('change', handleUrl, false);
         upload_divs[i].querySelector(".btn_edit_image").addEventListener('click', editImage, false);
     }
     
@@ -228,7 +246,10 @@ function onDocumentLoad(numSymbols) {
     document.querySelector(".inp_with_frame").addEventListener('change', handleChangeOnWithFrameCheckbox, false);
 
     // ... for general setting
-    document.querySelector(".inp_num_symbols").addEventListener('change', handleChangeOnNumSymbolsInput, false);
+    var num_buttons = document.querySelectorAll(".div_num_symbols button");
+    for (var i = 0; i < num_buttons.length; i++) {
+        num_buttons[i].addEventListener('click', handleChangeOnNumSymbolsInput, false);
+    }
 
     updateDominoes();
 }
@@ -260,7 +281,10 @@ function createModel(num) {
     
     for (var lower = 0; lower <= num; lower++) {
         
-        nums.push(lower);
+        nums.push({
+            num : lower,
+            url : domino_urls[lower]
+        });
         
         for (var upper = 0; upper <= lower; upper++) {
             dominoes.push({
@@ -271,17 +295,23 @@ function createModel(num) {
         }
     }
     
-    return {
+    var result = {
         numSymbols : num + 1,
         width: 10,
         nums : nums,
         dominoes: dominoes
     }
+    
+    result["btnActive" + (num + 1)] = " active ";
+    
+    return result;
 }
 
-// this is used to control the resize/crop component.
-var domino_symbol = -1;
-var domino_crop_states = [];
+var domino_symbol = -1; // the index of the currently selected domino (needed by the resize/crop component)
+var domino_crop_states = []; // (needed by the resize/crop component)
+// this is used to save the URLs
+var domino_urls = [ "img/domino0.svg", "img/domino1.svg","img/domino2.svg","img/domino3.svg","img/domino4.svg",
+                    "img/domino5.svg","img/domino6.svg","img/domino7.svg","img/domino8.svg","img/domino9.svg"];
 
 onDocumentLoad();
 

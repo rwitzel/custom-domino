@@ -1,45 +1,84 @@
-/** BEGIN default styles */
 
-body {
-    background: #88ABC2;
-    color: #EBF7F8;
+
+/* common styles ============================================================== */
+
+.long-heading {
+    padding-left:80px;
+    text-indent: -75px;
+}    
+
+/* section "intro" ============================================================== */
+
+.intro-header {
+    background: url(../img/Domino_whale-bone_hg.jpg) no-repeat center center !important;
 }
 
-body {
-  padding: 10px;
+/* section "choose no. of dominoes" ============================================================== */
+
+.step-number {
+    border:1px solid grey;
+    padding: 10px 20px 10px 20px;
+    margin-right: 10px;
+}
+
+.div_num_symbols {
+    text-align: center;
+    white-space: nowrap;
+}
+.div_num_symbols button {
+    font-size: 36px;
+    width: 70px;
 }
 
 
-/** END default styles */
+/* section "Upload images" ===================================================================== */
+.div_upload_divs_container {
+    text-align: center;    
+}
+
+.div_upload_divs {
+    text-align: center;    
+    display:inline-block;
+/*     margin-left: auto ; margin-right: auto ; center */
+}
+
+.upload_div {
+  margin-right:5px;
+  display:inline-block;
+}
 
 .thumb {
   height: 80px;
   width: 80px;
-/*   border: 1px solid #000; */
-  margin: 5px 5px 5px 5px;
 }
 
-.upload_div {
-  width:250px;
-  float:left;
+/* section "Crop container" ===================================================================== */
+.placeholder_for_crop_container {
+    margin-top:20px;
 }
 
-.upload_div output {
-  float:left;
+.cropContainer {
+    text-align:center;
+    width:100%;
+}
+.cropContainer .container {
+    width: 400px;
+    height: 400px;
+    margin: 0 auto; /* center */
+}
+.btn-crop {
+    display: inline-block;
+    margin-top:10px;
 }
 
-.upload_div span {
-  font-weight:bold;
+/* section "Set print options" ===================================================================== */
+
+.print_form label {
+    margin-right:10px;
+    font-weight: 700;
 }
 
-input[type=file] {
-  width:150px;
-  margin-top:5px;
-}
-input[type=text] {
-  width:100px;
-  margin-top:5px;
-}
+/* section "Results and Print" ===================================================================== */
 
 .domino_div {
 /*   border: 1px solid #000; */
@@ -60,33 +99,27 @@ input[type=text] {
     background-color: white; /* the background of the page must not be seen through */
 }
 
-/* the upper part of the domino looks a bit brighter (opacity) and is rotated. */
+/* the upper part of the domino is rotated. */
 .upper {
-  opacity:0.9;
-   transform: rotate(180deg);
-}
-
-.btn_print {
-  margin-top: 5px;
-}
-
-.inp_width {
-  width: 3em;
-}
-
-input:invalid {
-  color:red;
+  transform: rotate(180deg);
 }
 
 .with_frame .domino_div {
   border:1mm dotted #777;
 }
 
-.cropContainer {
-    width:100%;
+.domino_div output {
+    padding-top:0px;
 }
-.container {
-    width: 400px;
-    height: 400px;
-    margin: 0 auto; /* center */
+
+.print_button_div {
+    text-align: center;    
+}
+
+.print_button_div .domino_results {
+    display: inline-block;
+}
+
+.print_button_div button{
+    margin-top: 20px;    
 }
