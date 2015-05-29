@@ -256,7 +256,12 @@ function onDocumentLoad(numSymbols) {
 
 /**
  * EXAMPLE: { 
-            nums : [0,1,2,3,4,5,6],
+            nums : [
+			    { num: 0, url : null },
+				{ num: 1, url : "..." },
+				...
+				{ num: 6, url : null }
+		    ],
             dominoes : [
                 {
                   upper: 0,

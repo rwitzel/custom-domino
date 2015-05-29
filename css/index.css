@@ -10,7 +10,7 @@
 /* section "intro" ============================================================== */
 
 .intro-header {
-    background: url(../img/Domino_whale-bone_hg.jpg) no-repeat center center !important;
+    background: url(../img/Domino_whale-bone_hg_1900x1267_low_bright_contr_q20.jpg) no-repeat center center !important;
 }
 
 /* section "choose no. of dominoes" ============================================================== */
@@ -50,6 +50,15 @@
 .thumb {
   height: 80px;
   width: 80px;
+}
+
+super.hint_upload_images a {
+	color:black;
+}
+
+super.hint_upload_images a:hover {
+    color:blue;
+	text-decoration:none;
 }
 
 /* section "Crop container" ===================================================================== */
@@ -122,4 +131,14 @@
 
 .print_button_div button{
     margin-top: 20px;    
+}
+
+/* footer ===================================================================== */
+
+footer {
+    background-color: #f0f0f0 !important; /* a bit darker than the grey of section 'b' */
+}
+
+.copyright a {
+	color:black;
 }
