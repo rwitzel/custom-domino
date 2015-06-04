@@ -7,10 +7,34 @@
     text-indent: -75px;
 }    
 
+super.hint_upload_images a {
+    color:black;
+}
+
+super.hint_upload_images a:hover {
+    color:blue;
+    text-decoration:none;
+}
+
 /* section "intro" ============================================================== */
 
 .intro-header {
     background: url(../img/Domino_whale-bone_hg_1900x1267_low_bright_contr_q20.jpg) no-repeat center center !important;
+}
+
+/* section "Design your own dominoes " and "Five steps to your tiles" ======================================== */
+
+/* vertical alignment for images: flex model is appropriate. we override the float approach of bootstrap */
+@media (min-width: 768px) {
+    .dd-lg-flex-box {
+        display: flex;
+        align-items: center;
+    }
+    .dd-lg-flex-box .dd-lg-flex-item {
+        float:none !important;
+        flex:1;
+        max-width: 50%; /* for FF */  
+    }
 }
 
 /* section "choose no. of dominoes" ============================================================== */
@@ -50,15 +74,6 @@
 .thumb {
   height: 80px;
   width: 80px;
-}
-
-super.hint_upload_images a {
-	color:black;
-}
-
-super.hint_upload_images a:hover {
-    color:blue;
-	text-decoration:none;
 }
 
 /* section "Crop container" ===================================================================== */
