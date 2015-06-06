@@ -1,4 +1,6 @@
-
+/*
+  TODO refactor: use BEM naming convention
+ */
 
 /* common styles ============================================================== */
 
@@ -77,11 +79,8 @@ super.hint_upload_images a:hover {
 }
 
 /* section "Crop container" ===================================================================== */
-.placeholder_for_crop_container {
-    margin-top:20px;
-}
-
 .cropContainer {
+    margin-top:20px;
     text-align:center;
     width:100%;
 }
@@ -132,6 +131,7 @@ super.hint_upload_images a:hover {
   border:1mm dotted #777;
 }
 
+/* TODO ensure that ensure image doesn't span a page break */
 .domino_div output {
     padding-top:0px;
 }

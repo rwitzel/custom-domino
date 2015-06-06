@@ -1,1 +1,1 @@
-Design your own dominoes on [GitHub Pages](http://rwitzel.github.io/design-domino/) - a simple website without both server-side backend and client-side framework.
+Design your own dominoes on [GitHub Pages](http://rwitzel.github.io/design-domino/) - a simple website (without server-side backend, AngularJS as client-side framework).

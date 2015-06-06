@@ -30,12 +30,14 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- jQuery ('required' by angularJS element() and bootstrap) -->
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>  -->
+    <script src="js/angular.js"></script>
+
 </head>
 
 <body>
-
-    <!-- this style is dynamically updated when the user chooses another width -->
-    <style id="domino_width"> .domino_div img { height: 10mm; width: 10mm; } </style>
 
     <!-- Navigation -->
     <nav class="no_print navbar navbar-default navbar-fixed-top topnav" role="navigation">
@@ -165,11 +167,172 @@
     </div>
     <!-- /.content-section-b -->
     
+
+    <div ng-app="ddApp" ng-controller="DdCtrl">
     
-    <!-- container for dynamic content -->
-    <div class="dynamic">
-      <!-- place for the dynamic content -->
-    </div>
+        <!-- section "choose no. of dominoes" ========================================================================== -->
+        <div class="no_print content-section-a">
+    
+            <div class="container">
+    
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12">
+                        <hr class="section-heading-spacer">
+                        <div class="clearfix"></div>
+                        <h2 class="section-heading long-heading"><span class="step-number">1</span> Choose the number of different symbols</h2>
+                        <div class="div_num_symbols">
+                          <button value="5" class="btn" ng-click="clickNumTiles(5)" ng-class="{'active': model.numTiles == 5}">5</button>
+                          <button value="6" class="btn" ng-click="clickNumTiles(6)" ng-class="{'active': model.numTiles == 6}">6</button>
+                          <button value="7" class="btn" ng-click="clickNumTiles(7)" ng-class="{'active': model.numTiles == 7}">7</button>
+                          <button value="8" class="btn" ng-click="clickNumTiles(8)" ng-class="{'active': model.numTiles == 8}">8</button>
+                          <button value="9" class="btn" ng-click="clickNumTiles(9)" ng-class="{'active': model.numTiles == 9}">9</button>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+            <!-- /.container -->
+    
+        </div>
+        <!-- /.content-section-a -->
+    
+        <!-- section "Upload images" ========================================================================== -->
+        <div class="no_print content-section-b">
+    
+            <div class="container">
+    
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12">
+                        <hr class="section-heading-spacer">
+                        <div class="clearfix"></div>
+                        <h2 class="section-heading long-heading"><span class="step-number">2</span> Upload images<super class="hint_upload_images" title="Your images are not transferred to the internet. They are kept locally in the browser. Even if you edit them within the page."><a href="#hint_upload_images">*</a></super></h2>
+
+                        
+                        <div class="div_upload_divs_container">
+                        
+                            <p class="lead">Click on a tile to replace it with your own image</p>
+
+                            <div class="div_upload_divs">
+                                <div class="upload_div" data-num="{{tile.num}}" ng-repeat="tile in model.tiles | limitTo: model.numTiles">
+                                  <!-- the cropped image -->
+                                  <output>
+                                    <img class="thumb" ng-src="{{tile.url}}" title='{{tile.title}}'
+                                         onclick="angular.element(this).parent().parent().find('input').trigger('click');"/><!-- TODO -->
+                                  </output>
+                                  
+                                  <!-- resize / crop button -->
+                                  <br/>
+                                  <button class="btn btn_edit_image" ng-click="editImage(tile)">
+                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true" />
+                                  </button>
+                                                                    
+                                  <!-- the upload area
+                                    no binding for file select possible,
+                                    see https://github.com/angular/angular.js/issues/1375 -->
+                                  <input type="file" style="display:none"
+                                         ui-image-uploader='{ "callback": "changeImage", "param" : {{tile.num}} } '/>
+                                  
+                                </div>
+                            </div>
+                            
+                            <!--  crop container -->
+                            <div class="cropContainer" ng-show="showCropper" ui-image-cropper>
+                                <style> @import url("lib/cropper/cropper.css"); </style>
+                                <div class="container">
+                                    <!-- This image must be on the same domain as the demo or it will not work on a local file system -->
+                                    <img class="resize-image" src="img/circle-dominoes.jpg">
+                                </div>
+                                <button class="btn btn-crop">Crop</button>
+                            </div>
+
+                        </div>
+                                                                        
+                    </div>
+                </div>
+    
+            </div>
+            <!-- /.container -->
+
+        </div>
+        <!-- /.content-section-b -->
+
+        <!-- section "Print Options" ========================================================================== -->
+        <div class="no_print content-section-a">
+    
+            <div class="container">
+    
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12">
+                        <hr class="section-heading-spacer">
+                        <div class="clearfix"></div>
+                        <h2 class="section-heading long-heading"><span class="step-number">3</span> Set print options</h2>
+
+                        <div class="print_form">
+                            <form class="col-lg-4 col-sm-4 lead">
+                                <div class="form-group">
+                                  <label>Domino width (<span title="1 mm(millimeter) is 39.37 mil.">in mm</span>)</label> 
+                                  <!-- step="any" allows decimal values -->
+                                  <input class="form-control inp_width" ng-model="model.width" type="number" min="5" max="300" step="any"/>
+                                </div>
+                                <div class="checkbox">
+                                  <label>
+                                    <input class="inp_with_frame" type="checkbox" ng-model="model.withFrame"/> Add a frame to ease cutting
+                                  </label> 
+                                </div>
+                            </form>
+                        </div>
+                                                
+                    </div>
+                </div>
+    
+            </div>
+            <!-- /.container -->
+
+        </div>
+        <!-- /.content-section-a -->
+
+       <!-- section "Results and Print" ========================================================================== -->
+        <div class="content-section-b">
+    
+            <div class="container">
+    
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12">
+                        <hr class="no_print section-heading-spacer">
+                        <div class="no_print clearfix"></div>
+                        <h2 class="no_print section-heading"><span class="step-number">4</span> Print</h2>
+
+                        <div class="print_button_div">
+
+                            <!-- this style is dynamically updated when the user chooses another width -->
+                            <style id="domino_width"> .domino_div img { height: {{model.width}}mm; width: {{model.width}}mm; } </style>
+
+                            <div class="domino_results" ng-class="{ with_frame : model.withFrame}">
+                                  <div class="domino_div" ng-repeat-start="domino in dominoes">
+                                    <output>
+                                      <img ng-src="{{domino.upperUrl}}" title='' data-num="{{domino.upper}}" class="upper"/><br /><img
+                                        ng-src="{{domino.lowerUrl}}" title='' data-num="{{domino.lower}}" />
+                                    </output>
+                                  </div>
+
+                                  <br class="no_print next_domino_line" clear="all" ng-repeat-end ng-if="domino.optionalBreak"/>
+                            </div>
+                            
+                            <br clear="all"/>
+
+                            <button class="no_print btn btn_print lead" ng-click="handleClickOnPrintButton()">Open print dialog</button>
+                        </div>
+                                                
+                    </div>
+                </div>
+    
+            </div>
+            <!-- /.container -->
+
+        </div>
+        <!-- /.content-section-b -->
+
+    </div><!-- end of angular application -->
 
     <!-- section "glue and cut" ========================================================================== -->
     <div class="no_print content-section-a">
@@ -209,197 +372,9 @@
         </div>
     </footer>
 
-    
-    <template class="dominoUploadTemplate">
-      <div class="template_content">
-
-        <!-- section "choose no. of dominoes" ========================================================================== -->
-        <div class="no_print content-section-a">
-    
-            <div class="container">
-    
-                <div class="row">
-                    <div class="col-lg-12 col-sm-12">
-                        <hr class="section-heading-spacer">
-                        <div class="clearfix"></div>
-                        <h2 class="section-heading long-heading"><span class="step-number">1</span> Choose the number of different symbols</h2>
-                        <div class="div_num_symbols">
-                          <button value="5" class="btn {{{btnActive5}}}" >5</button>
-                          <button value="6" class="btn {{{btnActive6}}}" >6</button>
-                          <button value="7" class="btn {{{btnActive7}}}" >7</button>
-                          <button value="8" class="btn {{{btnActive8}}}" >8</button>
-                          <button value="9" class="btn {{{btnActive9}}}" >9</button>
-                          <label style="display:none">
-                              <!-- with type="range" we could avoid validation ... -->
-                              <input class="inp_num_symbols" value="{{numSymbols}}" type="number" min="5" max="9" required/>
-                          </label>
-                        </div>
-                    </div>
-                </div>
-    
-            </div>
-            <!-- /.container -->
-    
-        </div>
-        <!-- /.content-section-a -->
-    
-        <!-- section "Upload images" ========================================================================== -->
-        <div class="no_print content-section-b">
-    
-            <div class="container">
-    
-                <div class="row">
-                    <div class="col-lg-12 col-sm-12">
-                        <hr class="section-heading-spacer">
-                        <div class="clearfix"></div>
-                        <h2 class="section-heading long-heading"><span class="step-number">2</span> Upload images<super class="hint_upload_images" title="Your images are not transferred to the internet. They are kept locally in the browser. Even if you edit them within the page."><a href="#hint_upload_images">*</a></super></h2>
-
-                        
-                        <div class="div_upload_divs_container">
-                        
-                            <p class="lead">Click on a tile to replace it with your own image</p>
-
-                            <div class="div_upload_divs">
-                                {{#nums}}
-                                <div class="upload_div" data-num="{{num}}">
-                                  <!-- the cropped image -->
-                                  <output>
-                                    <img class="thumb" src="{{url}}" title='' />
-                                  </output>
-                                  
-                                  <!-- resize / crop button -->
-                                  <br/>
-                                  <button class="btn btn_edit_image">
-                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                  </button>
-                                  
-                                  <!-- the original image -->
-                                  <img class="original" src="{{url}}" style="display:none" />
-                                  
-                                  <!-- the upload area -->
-                                  <input type="file" style="display:none" /> <!-- style="display:none" -->
-                                  
-                                </div>
-                                {{/nums}}
-                            </div>
-
-                        </div>
-                        
-                        <div class="placeholder_for_crop_container"></div>
-                                                
-                    </div>
-                </div>
-    
-            </div>
-            <!-- /.container -->
-
-        </div>
-        <!-- /.content-section-b -->
-
-        <!-- section "Print Options" ========================================================================== -->
-        <div class="no_print content-section-a">
-    
-            <div class="container">
-    
-                <div class="row">
-                    <div class="col-lg-12 col-sm-12">
-                        <hr class="section-heading-spacer">
-                        <div class="clearfix"></div>
-                        <h2 class="section-heading long-heading"><span class="step-number">3</span> Set print options</h2>
-
-                        <div class="print_form">
-                            <form class="col-lg-4 col-sm-4 lead">
-                                <div class="form-group">
-                                  <label>Domino width (<span title="1 mm(millimeter) is 39.37 mil.">in mm</span>)</label> 
-                                  <!-- step="any" allows decimal values -->
-                                  <input class="form-control inp_width" value="{{width}}" type="number" min="5" max="300" step="any"/>
-                                </div>
-                                <div class="checkbox">
-                                  <label>
-                                    <input class="inp_with_frame" type="checkbox" /> Add a frame to ease cutting
-                                  </label> 
-                                </div>
-                            </form>
-                        </div>
-                                                
-                    </div>
-                </div>
-    
-            </div>
-            <!-- /.container -->
-
-        </div>
-        <!-- /.content-section-a -->
-
-       <!-- section "Results and Print" ========================================================================== -->
-        <div class="content-section-b">
-    
-            <div class="container">
-    
-                <div class="row">
-                    <div class="col-lg-12 col-sm-12">
-                        <hr class="no_print section-heading-spacer">
-                        <div class="no_print clearfix"></div>
-                        <h2 class="no_print section-heading"><span class="step-number">4</span> Print</h2>
-
-                        <div class="print_button_div">
-
-                            <div class="domino_results">
-                                {{#dominoes}}
-                                  <div class="domino_div">
-                                    <output>
-                                      <img src="img/blank-domino.svg" title='' data-num="{{upper}}" class="upper"/><br /><img
-                                        src="img/blank-domino.svg" title='' data-num="{{lower}}" />
-                                    </output>
-                                  </div>
-                                  {{#optionalBreak}}<br class="no_print next_domino_line" clear="all"/>{{/optionalBreak}}
-                                {{/dominoes}}
-                            </div>
-                            
-                            <br clear="all"/>
-
-                            <button class="no_print  btn btn_print lead">Open print dialog</button>
-                        </div>
-                                                
-                    </div>
-                </div>
-    
-            </div>
-            <!-- /.container -->
-
-        </div>
-        <!-- /.content-section-b -->
-
-
-      </div>
-    </template>
-
-    <!-- jQuery -->
-    <script src="js/jquery-2.1.4.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
-    <script type="text/javascript" src="js/mustache.min.js"></script>
+    <script src="lib/cropper/cropper.js"></script><!-- this script cannot be loaded within the div -->
     <script type="text/javascript" src="js/index.js"></script>
-
-    <template class="dominoResizeCropTemplate">
-    
-        <style>
-          @import url("lib/cropper/cropper.css");
-        </style>
-        
-        <div class="cropContainer">
-            <div class="container">
-                <!-- This image must be on the same domain as the demo or it will not work on a local file system -->
-                <img class="resize-image" src="lib/image-resize-crop-canvas/img/image.jpg">
-            </div>
-            <button class="btn btn-crop">Crop</button>
-        </div>
-    </template>
-    
-    <!-- these scripts cannot be loaded within the template. Therefore, we include them here. -->
-    <script src="lib/cropper/cropper.js"></script>
 
 </body>
 
