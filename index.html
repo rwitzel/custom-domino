@@ -21,7 +21,8 @@
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
+	      rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,7 +45,8 @@
         <div class="container topnav">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+				        data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
 <!--                     <span class="icon-bar"></span> -->
 <!--                     <span class="icon-bar"></span> -->
@@ -80,13 +82,16 @@
                         <hr class="intro-divider">
                         <ul class="list-inline intro-social-buttons">
                             <li>
-                                <a href="https://twitter.com/DesignDomino" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                                <a href="https://twitter.com/DesignDomino" class="btn btn-default btn-lg"><i 
+								        class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
                             </li>
                             <li>
-                                <a href="https://github.com/rwitzel/design-domino" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                                <a href="https://github.com/rwitzel/design-domino" class="btn btn-default btn-lg"><i
+ 								        class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
                             </li>
                             <li>
-                                <a href="https://www.facebook.com/DesignDominoes" class="btn btn-default btn-lg"><i class="fa fa-facebook fa-fw"></i> <span class="network-name">Facebook</span></a>
+                                <a href="https://www.facebook.com/DesignDominoes" class="btn btn-default btn-lg"><i 
+								       class="fa fa-facebook fa-fw"></i> <span class="network-name">Facebook</span></a>
                             </li>
                         </ul>
                     </div>
@@ -114,7 +119,8 @@
                         You need 
                     </p>
                     <ul class="lead">
-                        <li>some photographs<super class="hint_upload_images" title="They will be used as tiles."><a href="#hint_upload_images">*</a></super>
+                        <li>some photographs<super class="hint_upload_images" title="They will be used as tiles."
+						      ><a href="#hint_upload_images">*</a></super>
                         </li>
                         <li>a printer</li>
                         <li>scissors</li>
@@ -170,7 +176,7 @@
 
     <div ng-app="ddApp" ng-controller="DdCtrl">
     
-        <!-- section "choose no. of dominoes" ========================================================================== -->
+        <!-- section "choose no. of dominoes" ============================================================ -->
         <div class="no_print content-section-a">
     
             <div class="container">
@@ -179,13 +185,14 @@
                     <div class="col-lg-12 col-sm-12">
                         <hr class="section-heading-spacer">
                         <div class="clearfix"></div>
-                        <h2 class="section-heading long-heading"><span class="step-number">1</span> Choose the number of different symbols</h2>
+                        <h2 class="section-heading long-heading"><span class="step-number">1</span> 
+						   Choose the number of different symbols</h2>
                         <div class="div_num_symbols">
-                          <button value="5" class="btn" ng-click="clickNumTiles(5)" ng-class="{'active': model.numTiles == 5}">5</button>
-                          <button value="6" class="btn" ng-click="clickNumTiles(6)" ng-class="{'active': model.numTiles == 6}">6</button>
-                          <button value="7" class="btn" ng-click="clickNumTiles(7)" ng-class="{'active': model.numTiles == 7}">7</button>
-                          <button value="8" class="btn" ng-click="clickNumTiles(8)" ng-class="{'active': model.numTiles == 8}">8</button>
-                          <button value="9" class="btn" ng-click="clickNumTiles(9)" ng-class="{'active': model.numTiles == 9}">9</button>
+                          <button class="btn" ng-click="clickNumTiles(5)" ng-class="{'active': model.numTiles == 5}">5</button>
+                          <button class="btn" ng-click="clickNumTiles(6)" ng-class="{'active': model.numTiles == 6}">6</button>
+                          <button class="btn" ng-click="clickNumTiles(7)" ng-class="{'active': model.numTiles == 7}">7</button>
+                          <button class="btn" ng-click="clickNumTiles(8)" ng-class="{'active': model.numTiles == 8}">8</button>
+                          <button class="btn" ng-click="clickNumTiles(9)" ng-class="{'active': model.numTiles == 9}">9</button>
                         </div>
                     </div>
                 </div>
@@ -205,7 +212,10 @@
                     <div class="col-lg-12 col-sm-12">
                         <hr class="section-heading-spacer">
                         <div class="clearfix"></div>
-                        <h2 class="section-heading long-heading"><span class="step-number">2</span> Upload images<super class="hint_upload_images" title="Your images are not transferred to the internet. They are kept locally in the browser. Even if you edit them within the page."><a href="#hint_upload_images">*</a></super></h2>
+                        <h2 class="section-heading long-heading"><span class="step-number">2</span> Upload images
+						      <super class="hint_upload_images" title="Your images are not transferred to the internet.
+						      They are kept locally in the browser. Even if you edit them within the page."
+							  ><a href="#hint_upload_images">*</a></super></h2>
 
                         
                         <div class="div_upload_divs_container">
@@ -213,7 +223,8 @@
                             <p class="lead">Click on a tile to replace it with your own image</p>
 
                             <div class="div_upload_divs">
-                                <div class="upload_div" data-num="{{tile.num}}" ng-repeat="tile in model.tiles | limitTo: model.numTiles">
+                                <div class="upload_div" data-num="{{tile.num}}" 
+								     ng-repeat="tile in model.tiles | limitTo: model.numTiles">
                                   <!-- the cropped image -->
                                   <output>
                                     <img class="thumb" ng-src="{{tile.url}}" title='{{tile.title}}'
@@ -265,18 +276,20 @@
                     <div class="col-lg-12 col-sm-12">
                         <hr class="section-heading-spacer">
                         <div class="clearfix"></div>
-                        <h2 class="section-heading long-heading"><span class="step-number">3</span> Set print options</h2>
+                        <h2 class="section-heading long-heading"><span class="step-number">3</span>Set print options</h2>
 
                         <div class="print_form">
                             <form class="col-lg-4 col-sm-4 lead">
                                 <div class="form-group">
                                   <label>Domino width (<span title="1 mm(millimeter) is 39.37 mil.">in mm</span>)</label> 
                                   <!-- step="any" allows decimal values -->
-                                  <input class="form-control inp_width" ng-model="model.width" type="number" min="5" max="300" step="any"/>
+                                  <input class="form-control inp_width" ng-model="model.width" type="number"
+     								     min="5" max="300" step="any"/>
                                 </div>
                                 <div class="checkbox">
                                   <label>
-                                    <input class="inp_with_frame" type="checkbox" ng-model="model.withFrame"/> Add a frame to ease cutting
+                                    <input class="inp_with_frame" type="checkbox" ng-model="model.withFrame"/>
+									Add a frame to ease cutting
                                   </label> 
                                 </div>
                             </form>
@@ -315,12 +328,14 @@
                                     </output>
                                   </div>
 
-                                  <br class="no_print next_domino_line" clear="all" ng-repeat-end ng-if="domino.optionalBreak"/>
+                                  <br class="no_print next_domino_line" clear="all" 
+								      ng-repeat-end ng-if="domino.optionalBreak"/>
                             </div>
                             
                             <br clear="all"/>
 
-                            <button class="no_print btn btn_print lead" ng-click="handleClickOnPrintButton()">Open print dialog</button>
+                            <button class="no_print btn btn_print lead" ng-click="handleClickOnPrintButton()">
+							    Open print dialog</button>
                         </div>
                                                 
                     </div>
@@ -363,10 +378,12 @@
                 <div class="col-lg-12">
                     <ul class="list-inline">
                         <li>
-                            <super><a name="hint_upload_images">*</a></super> Your images are not transferred to the internet. They are kept locally in the browser. Even if you edit them within the page.
+                            <super><a name="hint_upload_images">*</a></super> Your images are not transferred to the
+							internet. They are kept locally in the browser. Even if you edit them within the page.
                         </li>
                     </ul>
-                    <p class="copyright text-muted small"> <a href="https://github.com/rwitzel/design-domino">Apache License 2.0. Rod Witzel</a></p>
+                    <p class="copyright text-muted small"> <a href="https://github.com/rwitzel/design-domino">
+					  Apache License 2.0. Rod Witzel</a></p>
                 </div>
             </div>
         </div>

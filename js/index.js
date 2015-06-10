@@ -109,7 +109,8 @@ ddApp.controller('DdCtrl', function($scope, ImageCropper) {
         for (var tileIndex = 0; tileIndex <= 9; tileIndex++) {
             tiles.push({
                 num         : tileIndex,
-                url         : domino_urls[tileIndex], /* the data URL of the tile image after cropping (or the original URL if not cropped) */
+                url         : domino_urls[tileIndex], /* the data URL of the tile image after cropping 
+				                                        (or the original URL if not cropped) */
                 originalUrl : domino_urls[tileIndex], /* the original URL of the tile image */ 
                 title       : domino_urls[tileIndex], /* the name of the image file */
                 canvasData  : null, /* crop information about the tile */
