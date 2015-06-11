@@ -180,8 +180,6 @@ ddApp.controller('DdCtrl', function($scope, ImageCropper) {
      */
     $scope.handleClickOnPrintButton = function(num){ print(); };
 
-    $scope.clickNumTiles = function(numTiles){ $scope.model.numTiles = numTiles; };
-
     $scope.editImage = function(tile) {
 
         $scope.showCropper = true;
