@@ -105,9 +105,8 @@ ddApp.controller('DdCtrl', function($scope, ImageCropper) {
         var domino_urls = [ "img/domino0.svg", "img/domino1.svg","img/domino2.svg","img/domino3.svg","img/domino4.svg",
                         "img/domino5.svg","img/domino6.svg","img/domino7.svg","img/domino8.svg","img/domino9.svg"];
 
-        var tiles = [];
-        for (var tileIndex = 0; tileIndex <= 9; tileIndex++) {
-            tiles.push({
+        var tiles = domino_urls.map(function(domino_ur, tileIndex) {
+            var tile = {
                 num         : tileIndex,
                 url         : domino_urls[tileIndex], /* the data URL of the tile image after cropping 
 				                                        (or the original URL if not cropped) */
@@ -115,8 +114,9 @@ ddApp.controller('DdCtrl', function($scope, ImageCropper) {
                 title       : domino_urls[tileIndex], /* the name of the image file */
                 canvasData  : null, /* crop information about the tile */
                 cropBoxData : null  /* crop information about the tile */
-            });
-        }
+            };
+            return tile;
+        });
         return tiles;
     }
 
