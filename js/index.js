@@ -178,7 +178,7 @@ ddApp.controller('DdCtrl', function($scope, ImageCropper) {
     /**
      * Opens the browser-specific dialog for printing. 
      */
-    $scope.handleClickOnPrintButton = function(num){ print(); };
+    $scope.handleClickOnPrintButton = function(){ print(); };
 
     $scope.editImage = function(tile) {
 
