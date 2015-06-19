@@ -41,7 +41,12 @@
 
 <body>
 
-    <!-- Google Analytics via Universal Analytics + Google Tag Manager -->
+    <!-- Universal Analytics Tags using Google Tag Manager
+      I just want to know how the users use the page. The contents of uploaded images are NOT tracked! -->
+    <script>
+      dataLayer = [{ 'event': 'pageLoad' }];
+    </script>
+
 <!-- Google Tag Manager -->
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-NCHNFD"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -51,7 +56,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NCHNFD');</script>
 <!-- End Google Tag Manager -->
-
 
     <!-- Navigation -->
     <nav class="no_print navbar navbar-default navbar-fixed-top topnav" role="navigation">
@@ -201,11 +205,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         <h2 class="section-heading long-heading"><span class="step-number">1</span> 
 						   Choose the number of different symbols</h2>
                         <div class="div_num_symbols">
-                          <button class="btn" ng-click="model.numTiles=5" ng-class="{'active': model.numTiles == 5}">5</button>
-                          <button class="btn" ng-click="model.numTiles=6" ng-class="{'active': model.numTiles == 6}">6</button>
-                          <button class="btn" ng-click="model.numTiles=7" ng-class="{'active': model.numTiles == 7}">7</button>
-                          <button class="btn" ng-click="model.numTiles=8" ng-class="{'active': model.numTiles == 8}">8</button>
-                          <button class="btn" ng-click="model.numTiles=9" ng-class="{'active': model.numTiles == 9}">9</button>
+                          <button class="btn" ng-click="setNumTiles(5)" ng-class="{'active': model.numTiles == 5}">5</button>
+                          <button class="btn" ng-click="setNumTiles(6)" ng-class="{'active': model.numTiles == 6}">6</button>
+                          <button class="btn" ng-click="setNumTiles(7)" ng-class="{'active': model.numTiles == 7}">7</button>
+                          <button class="btn" ng-click="setNumTiles(8)" ng-class="{'active': model.numTiles == 8}">8</button>
+                          <button class="btn" ng-click="setNumTiles(9)" ng-class="{'active': model.numTiles == 9}">9</button>
                         </div>
                     </div>
                 </div>

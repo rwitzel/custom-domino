@@ -175,12 +175,37 @@ ddApp.controller('DdCtrl', function($scope, ImageCropper) {
     
     // event handlers ======================================================================================
 
+    $scope.setNumTiles = function(numTiles){ 
+        
+        dataLayer.push({
+            'numTiles'  : numTiles,
+            'event'     : 'setNumTiles'
+        });
+        
+        $scope.model.numTiles = numTiles;
+    };
+
     /**
      * Opens the browser-specific dialog for printing. 
      */
-    $scope.handleClickOnPrintButton = function(){ print(); };
+    $scope.handleClickOnPrintButton = function(){ 
+        
+        dataLayer.push({
+            'numTiles'  : $scope.model.numTiles,
+            'width'     : $scope.model.width,
+            'withFrame' : $scope.model.withFrame,
+            'event'     : 'print'
+        });
+        
+        print(); 
+    };
 
     $scope.editImage = function(tile) {
+
+        dataLayer.push({
+            'tileIndex' : tile.num,
+            'event'     : 'editImage'
+        });
 
         $scope.showCropper = true;
 
@@ -196,6 +221,12 @@ ddApp.controller('DdCtrl', function($scope, ImageCropper) {
     };
     
     $scope.changeImage = function(newImage) {
+
+        dataLayer.push({
+            'tileIndex' : newImage.param,
+            'event'     : 'changeImage'
+        });
+
         $scope.model.tiles[newImage.param] = {
             num         : newImage.param,
             url         : newImage.url,
