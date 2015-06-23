@@ -101,17 +101,19 @@ ddApp.controller('DdCtrl', function($scope, ImageCropper) {
 
     // initialize model ======================================================================================
 
-    function initTiles() {
-        var domino_urls = [ "img/domino0.svg", "img/domino1.svg","img/domino2.svg","img/domino3.svg","img/domino4.svg",
-                        "img/domino5.svg","img/domino6.svg","img/domino7.svg","img/domino8.svg","img/domino9.svg"];
 
-        var tiles = domino_urls.map(function(domino_ur, tileIndex) {
+    function initTiles() {
+
+        var domino_urls = [ "img/domino0.svg", "img/domino1.svg","img/domino2.svg","img/domino3.svg","img/domino4.svg",
+                            "img/domino5.svg", "img/domino6.svg","img/domino7.svg","img/domino8.svg","img/domino9.svg"];
+
+        var tiles = domino_urls.map(function(domino_url, tileIndex) {
             var tile = {
                 tileIndex   : tileIndex,
-                url         : domino_urls[tileIndex], /* the data URL of the tile image after cropping 
-				                                        (or the original URL if not cropped) */
-                originalUrl : domino_urls[tileIndex], /* the original URL of the tile image */ 
-                title       : domino_urls[tileIndex], /* the name of the image file */
+                url         : domino_url, /* the data URL of the tile image after cropping 
+				                             (or the original URL if not cropped) */
+                originalUrl : domino_url, /* the original URL of the tile image */ 
+                title       : domino_url, /* the name of the image file */
                 canvasData  : null, /* crop information about the tile */
                 cropBoxData : null  /* crop information about the tile */
             };
@@ -236,7 +238,31 @@ ddApp.controller('DdCtrl', function($scope, ImageCropper) {
             cropBoxData : null  
         };
     }
-    
+
+    $scope.loadExamples = function() {
+
+        dataLayer.push({ 'event'     : 'loadExamples' });
+        
+        $scope.numTiles = 5;
+
+        var example_urls = [ "img/example0_clown_fish.jpg", "img/example1_tux.png", "img/example2_hedgehog.jpg", 
+              "img/example3_fly.svg", "img/example4_elephant.jpg", "img/example5_flower.jpg", "img/example6_cow.jpg" ];
+        
+        example_urls.forEach(function(example_url, tileIndex) {
+        
+            $scope.model.tiles[tileIndex] = {
+                tileIndex   : tileIndex,
+                url         : example_url,
+                originalUrl : example_url, 
+                title       : example_url,
+                canvasData  : null,
+                cropBoxData : null 
+            };
+            
+        });
+        
+    }
+
     // watch expressions ======================================================================================
 
     $scope.$watch("model", function(newValue, oldValue, scope) {
