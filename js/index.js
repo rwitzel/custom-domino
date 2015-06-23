@@ -62,6 +62,9 @@ ddApp.directive('uiImageCropper', function(ImageCropper) {
 
 ddApp.directive('uiImageUploader', function() {
     return {
+        scope : {
+            "onUploadCallback" : "&onUpload"
+        },
         link: function($scope, element, attrs) {
 
             element.on('change', function(evt) {
@@ -80,12 +83,9 @@ ddApp.directive('uiImageUploader', function() {
                 reader.onload = function(e) {
                     $scope.$apply(function() {
 
-                        var data = JSON.parse(attrs.uiImageUploader);
-                        
-                        $scope[data.callback]({
+                        $scope.onUploadCallback({
                             url      : e.target.result,
-                            filename : theFile.name,
-                            param  : data.param 
+                            filename : theFile.name
                         });
                     });
                 };
@@ -220,18 +220,18 @@ ddApp.controller('DdCtrl', function($scope, ImageCropper) {
         });
     };
     
-    $scope.changeImage = function(newImage) {
+    $scope.changeImage = function(newImageUrl, newImageFilename, tileIndex) {
 
         dataLayer.push({
-            'tileIndex' : newImage.param,
+            'tileIndex' : tileIndex,
             'event'     : 'changeImage'
         });
 
-        $scope.model.tiles[newImage.param] = {
-            num         : newImage.param,
-            url         : newImage.url,
-            originalUrl : newImage.url,
-            title       : newImage.filename,
+        $scope.model.tiles[tileIndex] = {
+            num         : tileIndex,
+            url         : newImageUrl,
+            originalUrl : newImageUrl,
+            title       : newImageFilename,
             canvasData  : null, 
             cropBoxData : null  
         };

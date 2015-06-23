@@ -258,7 +258,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                     no binding for file select possible,
                                     see https://github.com/angular/angular.js/issues/1375 -->
                                   <input type="file" style="display:none"
-                                         ui-image-uploader='{ "callback": "changeImage", "param" : {{tile.num}} } '/>
+                                         ui-image-uploader on-upload="changeImage(url, filename, tile.num)"/>
                                   
                                 </div>
                             </div>
