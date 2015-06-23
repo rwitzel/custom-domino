@@ -240,7 +240,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             <p class="lead">Click on a tile to replace it with your own image</p>
 
                             <div class="div_upload_divs">
-                                <div class="upload_div" data-num="{{tile.num}}" 
+                                <div class="upload_div" data-num="{{tile.tileIndex}}" 
 								     ng-repeat="tile in model.tiles | limitTo: model.numTiles">
                                   <!-- the cropped image -->
                                   <output>
@@ -258,7 +258,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                                     no binding for file select possible,
                                     see https://github.com/angular/angular.js/issues/1375 -->
                                   <input type="file" style="display:none"
-                                         ui-image-uploader on-upload="changeImage(url, filename, tile.num)"/>
+                                         ui-image-uploader on-upload="changeImage(url, filename, tile.tileIndex)"/>
                                   
                                 </div>
                             </div>
@@ -340,8 +340,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             <div class="domino_results" ng-class="{ with_frame : model.withFrame}">
                                   <div class="domino_div" ng-repeat-start="domino in dominoes">
                                     <output>
-                                      <img ng-src="{{domino.upperUrl}}" title='' data-num="{{domino.upper}}" class="upper"/><br /><img
-                                        ng-src="{{domino.lowerUrl}}" title='' data-num="{{domino.lower}}" />
+                                      <img ng-src="{{domino.upperUrl}}" title='' class="upper"/><br /><img
+                                        ng-src="{{domino.lowerUrl}}" title='' />
                                     </output>
                                   </div>
 

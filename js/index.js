@@ -107,7 +107,7 @@ ddApp.controller('DdCtrl', function($scope, ImageCropper) {
 
         var tiles = domino_urls.map(function(domino_ur, tileIndex) {
             var tile = {
-                num         : tileIndex,
+                tileIndex   : tileIndex,
                 url         : domino_urls[tileIndex], /* the data URL of the tile image after cropping 
 				                                        (or the original URL if not cropped) */
                 originalUrl : domino_urls[tileIndex], /* the original URL of the tile image */ 
@@ -142,10 +142,10 @@ ddApp.controller('DdCtrl', function($scope, ImageCropper) {
                 model : {
                     numTiles : 7,
                     tiles : [
-                        { num: 0, url : null, canvasData : null, cropBoxData : null},
-                        { num: 1, ...},
+                        { tileIndex: 0, url : null, canvasData : null, cropBoxData : null},
+                        { tileIndex: 1, ...},
                         ...
-                        { num: 6, ... }
+                        { tileIndex: 6, ... }
                     ]
                     ...
                 }
@@ -228,7 +228,7 @@ ddApp.controller('DdCtrl', function($scope, ImageCropper) {
         });
 
         $scope.model.tiles[tileIndex] = {
-            num         : tileIndex,
+            tileIndex   : tileIndex,
             url         : newImageUrl,
             originalUrl : newImageUrl,
             title       : newImageFilename,
